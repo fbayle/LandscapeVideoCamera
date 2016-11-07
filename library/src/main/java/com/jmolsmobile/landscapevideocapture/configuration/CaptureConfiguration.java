@@ -34,6 +34,7 @@ public class CaptureConfiguration implements Parcelable {
     private int mVideoWidth = PredefinedCaptureConfigurations.WIDTH_720P;
     private int mVideoHeight = PredefinedCaptureConfigurations.HEIGHT_720P;
     private int mBitrate = PredefinedCaptureConfigurations.BITRATE_HQ_720P;
+    private int mFramerate = 25;
     private int mMaxDurationMs = NO_DURATION_LIMIT;
     private int mMaxFilesizeBytes = NO_FILESIZE_LIMIT;
     private boolean mShowTimer = false;
@@ -66,6 +67,12 @@ public class CaptureConfiguration implements Parcelable {
         this(resolution, quality, maxDurationSecs, maxFilesizeMb);
         mShowTimer = showTimer;
         mAllowFrontFacingCamera = allowFrontFacingCamera;
+    }
+    
+    public CaptureConfiguration(CaptureResolution resolution, CaptureQuality quality, int framerate, int maxDurationSecs,
+                                int maxFilesizeMb, boolean showTimer, boolean allowFrontFacingCamera) {
+        this(resolution, quality, maxDurationSecs, maxFilesizeMb, showTimer, allowFrontFacingCamera);
+        mFramerate=framerate
     }
 
     public CaptureConfiguration(CaptureResolution resolution, CaptureQuality quality, int maxDurationSecs,
@@ -106,6 +113,13 @@ public class CaptureConfiguration implements Parcelable {
      */
     public int getVideoBitrate() {
         return mBitrate;
+    }
+    
+    /**
+     * @return Framerate of the captured video in frames per second
+     */
+    public int getVideoFramerate() {
+        return mFramerate;
     }
 
     /**
@@ -166,6 +180,7 @@ public class CaptureConfiguration implements Parcelable {
         dest.writeInt(mVideoWidth);
         dest.writeInt(mVideoHeight);
         dest.writeInt(mBitrate);
+        dest.writeInt(mFramerate);
         dest.writeInt(mMaxDurationMs);
         dest.writeInt(mMaxFilesizeBytes);
         dest.writeByte((byte) (mShowTimer ? 1 : 0));
@@ -196,6 +211,7 @@ public class CaptureConfiguration implements Parcelable {
         mVideoWidth = in.readInt();
         mVideoHeight = in.readInt();
         mBitrate = in.readInt();
+        mFramerate = in.readInt();
         mMaxDurationMs = in.readInt();
         mMaxFilesizeBytes = in.readInt();
         mShowTimer = in.readByte() != 0;
