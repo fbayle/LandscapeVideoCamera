@@ -72,7 +72,7 @@ public class CaptureConfiguration implements Parcelable {
     public CaptureConfiguration(CaptureResolution resolution, CaptureQuality quality, int framerate, int maxDurationSecs,
                                 int maxFilesizeMb, boolean showTimer, boolean allowFrontFacingCamera) {
         this(resolution, quality, maxDurationSecs, maxFilesizeMb, showTimer, allowFrontFacingCamera);
-        mFramerate=framerate
+        mFramerate=framerate;
     }
 
     public CaptureConfiguration(CaptureResolution resolution, CaptureQuality quality, int maxDurationSecs,
